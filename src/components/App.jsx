@@ -1,5 +1,6 @@
+import React from 'react';
+import Section from './Section';
 
-import React from "react";
 
 class App extends React.Component {
   state = {
@@ -28,29 +29,18 @@ class App extends React.Component {
   };
 
   render() {
+    const { good, neutral, bad } = this.state;
     return (
-      <div>
-        <h1>Please leave feedback</h1>
-        <button name="good" onClick={this.onClick}>
-          Good
-        </button>
-        <button name="neutral" onClick={this.onClick}>
-          Neutral
-        </button>
-        <button name="bad" onClick={this.onClick}>
-          Bad
-        </button>
-        <h2>Statistics</h2>
-        <ul>
-          <li>Good: {this.state.good}</li>
-          <li>Neutral: {this.state.neutral}</li>
-          <li>Bad: {this.state.bad}</li>
-        </ul>
-        <ul>
-          <li>Total: {this.countTotalFeedback()}</li>
-          <li>Positive feedback: {this.countPositiveFeedbackPercentage()}%</li>
-        </ul>
-      </div>
+      <Section
+        title="Please leave feedback"
+        good={good}
+        neutral={neutral}
+        bad={bad}
+        total={this.countTotalFeedback()}
+        positivePercentage={this.countPositiveFeedbackPercentage()}
+        options={Object.keys(this.state)}
+        onLeaveFeedback={this.onClick}
+      />
     );
   }
 }
